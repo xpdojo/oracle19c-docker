@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  oracledb:
+    image: markruler/oracledb:19.3.0-ee
+    container_name: oracledb
+    ports:
+      - 1521:1521
+      - 5500:5500
+    environment:
+      ORACLE_PDB: orcl
+      ORACLE_PWD: password
+      INIT_SGA_SIZE: 3000
+      INIT_PGA_SIZE: 1000
+    # volumes:
+    #   - /opt/oracle/oradata:/user/app/oracle/oradata
