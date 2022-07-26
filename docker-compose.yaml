@@ -8,9 +8,24 @@ services:
       - 1521:1521
       - 5500:5500
     environment:
-      ORACLE_PDB: orcl
-      ORACLE_PWD: password
+      # The Oracle Database SID that should be used (default: ORCLCDB).
+      ORACLE_SID: orcl
+      # The Oracle Database PDB name that should be used (default: ORCLPDB1).
+      # PDB: pluggable database
+      # ORACLE_PDB: test
+      # The Oracle Database SYS, SYSTEM and PDB_ADMIN password (default: auto generated).
+      # ORACLE_PWD: admin123
       INIT_SGA_SIZE: 3000
       INIT_PGA_SIZE: 1000
-    # volumes:
-    #   - /opt/oracle/oradata:/user/app/oracle/oradata
+    volumes:
+      - oracle-data:/opt/oracle:rw
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+
+volumes:
+  oracle-data:
+    driver: local
+    # driver_opts:
+    #   size: "10GiB"

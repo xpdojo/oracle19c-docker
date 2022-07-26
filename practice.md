@@ -146,7 +146,13 @@ docker push markruler/oracledb:19.3.0-ee
 
 ```ps1
 # docker run --name oracledb -p 1521:1521 -p 5500:5500 -e ORACLE_PDB=orcl -e ORACLE_PWD=password -e INIT_SGA_SIZE=3000 -e INIT_PGA_SIZE=1000 -d markruler/oracledb:19.3.0-ee
-docker-compose up
+docker-compose up -d
+# docker-compose logs -f
+docker logs oracledb -f
+```
+
+```sh
+docker exec -it oracledb bash
 ```
 
 ```ps1
@@ -162,4 +168,16 @@ LISTENER =
 
 DEDICATED_THROUGH_BROKER_LISTENER=ON
 DIAG_ADR_ENABLED = off
+```
+
+## SQL*Plus
+
+```sh
+sqlplus / as sysdba
+SQL>
+```
+
+```sh
+sqlplus /nolog
+SQL> connect / as sysdba
 ```
