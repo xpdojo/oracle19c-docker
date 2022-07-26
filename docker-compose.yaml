@@ -9,10 +9,10 @@ services:
       - 5500:5500
     environment:
       # The Oracle Database SID that should be used (default: ORCLCDB).
-      ORACLE_SID: orcl
+      #ORACLE_SID: orcl
       # The Oracle Database PDB name that should be used (default: ORCLPDB1).
       # PDB: pluggable database
-      # ORACLE_PDB: test
+      #ORACLE_PDB: orcl
       # The Oracle Database SYS, SYSTEM and PDB_ADMIN password (default: auto generated).
       # ORACLE_PWD: admin123
       INIT_SGA_SIZE: 3000
@@ -26,6 +26,6 @@ services:
 
 volumes:
   oracle-data:
-    driver: local
-    # driver_opts:
-    #   size: "10GiB"
+    # docker volume prune
+    # docker volume create --name=oracle-data
+    external: true

@@ -172,6 +172,9 @@ DIAG_ADR_ENABLED = off
 
 ## SQL*Plus
 
+- DBeaver에서는 CDB로 잘 연결되지만 DataGrip은 연결되지 않음.
+- GUI Client에서 PDB로 연결 방법 모름.
+
 ```sh
 sqlplus / as sysdba
 SQL>
@@ -180,4 +183,42 @@ SQL>
 ```sh
 sqlplus /nolog
 SQL> connect / as sysdba
+```
+
+### User 생성
+
+```sql
+-- C## -> CDB: ORCL
+-- https://stackoverflow.com/questions/33330968/error-ora-65096-invalid-common-user-or-role-name-in-oracle
+create user c##username identified by password;
+grant connect, resource, dba to username;
+```
+
+```sql
+connect username/password;
+
+-- 현재 사용자 조회
+select sys_context('userenv', 'current_user') from dual;
+```
+
+### 모든 User 조회
+
+```sql
+set linesize 200
+col username for a20 word_wrapped
+col default_collation for a20 word_wrapped
+select * from all_users;
+```
+
+### CDB:PDB
+
+```sql
+show con_name
+-- orclcdb
+
+show pdbs
+-- orclpdb1
+
+alter session set container=orclpdb1;
+-- Session altered.
 ```
